@@ -1,9 +1,14 @@
 package log
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
-const defaultScope = ""
-const defaultSkip = 3
+const (
+	defaultScope = ""
+	defaultSkip  = 3
+)
 
 func Debug(messages ...interface{}) {
 	log.print(DebugLevel, defaultScope, defaultSkip, messages)
@@ -55,14 +60,17 @@ func Errorv(message string, keysValues ...interface{}) {
 
 func Fatal(messages ...interface{}) {
 	log.print(FatalLevel, defaultScope, defaultSkip, messages)
+	os.Exit(1)
 }
 
 func Fatalf(format string, args ...interface{}) {
 	log.printf(FatalLevel, defaultScope, defaultSkip, format, args)
+	os.Exit(1)
 }
 
 func Fatalv(message string, keysValues ...interface{}) {
 	log.printv(FatalLevel, defaultScope, defaultSkip, message, keysValues)
+	os.Exit(1)
 }
 
 func Panic(messages ...interface{}) {

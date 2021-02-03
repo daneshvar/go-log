@@ -1,6 +1,9 @@
 package log
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 type Logger struct {
 	scope  string
@@ -93,18 +96,22 @@ func (l *Logger) Errorv(message string, keysValues ...interface{}) {
 
 func (l *Logger) Fatal(messages ...interface{}) {
 	log.print(FatalLevel, l.scope, l.skip, messages)
+	os.Exit(1)
 }
 
 func (l *Logger) Fatalln(messages ...interface{}) {
 	log.print(FatalLevel, l.scope, l.skip, messages)
+	os.Exit(1)
 }
 
 func (l *Logger) Fatalf(format string, args ...interface{}) {
 	log.printf(FatalLevel, l.scope, l.skip, format, args)
+	os.Exit(1)
 }
 
 func (l *Logger) Fatalv(message string, keysValues ...interface{}) {
 	log.printv(FatalLevel, l.scope, l.skip, message, keysValues)
+	os.Exit(1)
 }
 
 func (l *Logger) Panic(messages ...interface{}) {
